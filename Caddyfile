@@ -1,0 +1,4 @@
+test990.whizzygeeks.com, :80, :443 {
+
+reverse_proxy http://web:8000
+}
