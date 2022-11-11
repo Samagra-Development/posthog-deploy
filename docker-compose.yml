@@ -25,7 +25,9 @@ services:
         # Note: please keep the default version in sync across
         #       `posthog` and the `charts-clickhouse` repos
         #
-        image: ${CLICKHOUSE_SERVER_IMAGE:-clickhouse/clickhouse-server:22.3}
+        build:
+            context: .
+            dockerfile: build/Dockerfile.Clickhouse
         restart: on-failure
         depends_on:
             - kafka
@@ -57,7 +59,9 @@ services:
             ALLOW_PLAINTEXT_LISTENER: 'true'
 
     worker: &worker
-        image: posthog/posthog:latest-release
+        build:
+            context: .
+            dockerfile: build/Dockerfile.Posthog
         command: ./bin/docker-worker-celery --with-scheduler
         restart: on-failure
         environment:
@@ -102,7 +106,9 @@ services:
 #        depends_on:
 #                - web
     plugins:
-        image: posthog/posthog:latest-release
+        build:
+            context: .
+            dockerfile: build/Dockerfile.Posthog
         command: ./bin/plugin-server --no-restart-loop
         restart: on-failure
         environment:
