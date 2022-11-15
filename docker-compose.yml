@@ -92,7 +92,7 @@ services:
         command: /compose/start
         restart: on-failure
         ports:
-                - "8023:8000"
+            - "8023:8000"
         volumes:
             - ./compose:/compose
 #    nginx:
