@@ -8,6 +8,7 @@ version: '3'
 
 services:
     db:
+        hostname: posthog_db
         image: postgres:12-alpine
         restart: on-failure
         environment:
@@ -25,6 +26,7 @@ services:
         # Note: please keep the default version in sync across
         #       `posthog` and the `charts-clickhouse` repos
         #
+        hostname: posthog_clickhouse
         build:
             context: .
             dockerfile: build/Dockerfile.Clickhouse
