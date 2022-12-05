@@ -13,6 +13,7 @@ def loop():
             s.connect(('posthog_db', 6432))
         print("Postgres is ready")
     except ConnectionRefusedError as e:
+        print(e)
         time.sleep(5)
         loop()
 
