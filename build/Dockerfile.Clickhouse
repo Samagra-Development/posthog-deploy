@@ -1,4 +1,4 @@
-FROM clickhouse/clickhouse-server:22.3
+FROM clickhouse/clickhouse-server:21.6
 
 # copy other needed files for Posthog services
 COPY ./idl /idl
