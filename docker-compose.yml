@@ -35,10 +35,10 @@ services:
             - kafka
             - zookeeper
         volumes:
-            - ./idl:/idl
-            - ./docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-            - ./docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
-            - ./docker/clickhouse/users.xml:/etc/clickhouse-server/users.xml
+            - ./posthog/posthog/idl:/idl
+            - ./posthog/docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+            - ./posthog/docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
+            - ./posthog/docker/clickhouse/users.xml:/etc/clickhouse-server/users.xml
             - clickhouse-data:/var/lib/clickhouse
     zookeeper:
         image: zookeeper:3.7.0
@@ -68,7 +68,7 @@ services:
         restart: on-failure
         environment:
             SENTRY_DSN: 'https://public@sentry.example.com/1'
-            SITE_URL: http://test990.whizzygeeks.com
+            SITE_URL: https://
             DISABLE_SECURE_SSL_REDIRECT: 'true'
             IS_BEHIND_PROXY: 'true'
             DATABASE_URL: 'postgres://posthog:posthog@db:5432/posthog'
@@ -78,7 +78,7 @@ services:
             CLICKHOUSE_VERIFY: 'false'
             KAFKA_URL: 'kafka://kafka'
             REDIS_URL: 'redis://redis:6379/'
-            SECRET_KEY: 0d541d582350d5de69a856136177a2c1ee23532db0246b9f954f7c70
+            SECRET_KEY: 1e027b3c2e4aa62260cd71a8ae253827196072dd153480b6ee9fb264
             PGHOST: db
             PGUSER: posthog
             PGPASSWORD: posthog

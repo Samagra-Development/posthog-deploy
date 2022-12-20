@@ -1,0 +1,28 @@
+.actions-pie-component {
+    width: 100%;
+    height: 100%;
+
+    .pie-chart {
+        position: relative;
+        width: 100%;
+        height: calc(100% - 100px);
+        transition: height 0.5s;
+    }
+
+    @media (max-width: 700px) {
+        .pie-chart {
+            height: calc(100% - 60px);
+        }
+        h1 {
+            font-size: 48px;
+        }
+    }
+    @media (max-width: 500px) {
+        .pie-chart {
+            height: calc(100% - 50px);
+        }
+        h1 {
+            font-size: 32px;
+        }
+    }
+}

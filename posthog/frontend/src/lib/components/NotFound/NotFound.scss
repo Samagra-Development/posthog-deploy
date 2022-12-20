@@ -1,0 +1,12 @@
+.NotFoundComponent {
+    text-align: center;
+    margin-top: 2rem;
+    margin: 6rem auto;
+    max-width: 600px;
+
+    .NotFoundComponent__graphic {
+        background: url('../../../../public/not-found-astrohog.png') no-repeat center center;
+        height: 270px;
+        width: 100%;
+    }
+}

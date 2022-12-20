@@ -1,0 +1,59 @@
+#!/bin/bash
+
+while test $# -gt 0; do
+  case "$1" in
+    -h|--help)
+      echo "USAGE:"
+      echo "    bin/plugin-server [FLAGS]"
+      echo " "
+      echo "FLAGS:"
+      echo "    -h, --help           Print this help information."
+      echo "    --no-restart-loop    Run without restart loop. Recommended when deferring resiliency to e.g. docker-compose."
+      exit 0
+      ;;
+    --no-restart-loop)
+      NO_RESTART_LOOP='true'
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+export BASE_DIR=$(dirname $(dirname "$PWD/${0#./}"))
+
+export KAFKA_URL=${KAFKA_URL:-'kafka://kafka:9092'}
+export KAFKA_HOSTS
+
+./bin/migrate-check
+
+cd plugin-server
+
+if [[ -n $DEBUG ]]; then
+  echo "🧐 Verifying installed packages..."
+  yarn --frozen-lockfile
+fi
+
+if [ $? -ne 0 ]; then
+  echo "💥 Verification failed!"
+  exit 1
+fi
+
+[[ -n $DEBUG ]] && cmd="yarn start:dev" || cmd="node dist/index.js"
+
+if [[ -n $NO_RESTART_LOOP ]]; then
+  echo "▶️ Starting plugin server..."
+  trap 'kill -TERM $child 2>/dev/null; while kill -0 $child 2>/dev/null; do sleep 1; done' EXIT
+  $cmd &
+  child=$!
+  wait $child
+else
+  echo "🔁 Starting plugin server in a resiliency loop..."
+  while true; do
+    $cmd
+    echo "💥 Plugin server crashed!"
+    echo "⌛️ Waiting 2 seconds before restarting..."
+    sleep 2
+  done
+fi
