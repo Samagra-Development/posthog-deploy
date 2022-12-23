@@ -3,5 +3,5 @@ FROM clickhouse/clickhouse-server:22.3
 # copy other needed files for Posthog services
 COPY ./posthog/posthog/idl /idl
 COPY ./posthog/docker/clickhouse/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
-COPY ./posthog/docker/clickhouse/config.xml /etc/clickhouse-server/config.xml
+COPY ./posthog/docker/clickhouse/config-dockerfile.xml /etc/clickhouse-server/config.xml
 COPY ./posthog/docker/clickhouse/users.xml /etc/clickhouse-server/users.xml
