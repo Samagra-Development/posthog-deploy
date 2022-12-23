@@ -11,7 +11,7 @@ node() {
             cleanWs()
             checkout scm
             commit_hash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-            env.commit_id = sh(script: 'echo ' + env.docker_repo + '_' + commit_hash + '_' + env.BRANCH_NAME, returnStdout: true).trim()
+            env.commit_id = sh(script: 'echo ' + commit_hash + '_' + env.BRANCH_NAME, returnStdout: true).trim()
             echo "${env.commit_id}"
     }
 
