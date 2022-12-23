@@ -18,21 +18,21 @@ node() {
     stage('docker-build-posthog') {
             sh '''
                 # docker build -f <location-of-docker-file> -t <tag-of-docker-image> <context-for-docker-image>
-                docker build -f ./build/Dockerfile.Posthog -t $docker_server/posthog:$commit_id .
+                docker build -f ./build/Dockerfile.Posthog -t $docker_server/posthog-deploy-posthog:$commit_id .
                 '''
     }
 
     stage('docker-build-clickhouse') {
             sh '''
                 # docker build -f <location-of-docker-file> -t <tag-of-docker-image> <context-for-docker-image>
-                docker build -f ./build/Dockerfile.Posthog -t $docker_server/clickhouse:$commit_id .
+                docker build -f ./build/Dockerfile.Clickhouse -t $docker_server/posthog-deploy-clickhouse:$commit_id .
                 '''
     }
 
     stage('docker-push') {
         sh '''
-                docker push $docker_server/posthog:$commit_id
-                docker push $docker_server/clickhouse:$commit_id
+                docker push $docker_server/posthog-deploy-posthog:$commit_id
+                docker push $docker_server/posthog-deploy-clickhouse:$commit_id
                 '''
     }
     stage('ArchiveArtifacts') {
