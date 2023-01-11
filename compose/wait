@@ -10,7 +10,7 @@ def loop():
             s.connect(('posthog_clickhouse', 9000))
         print("Clickhouse is ready")
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect(('posthog_db', 5432))
+            s.connect(('posthog_db', 6432))
         print("Postgres is ready")
     except ConnectionRefusedError as e:
         print(e)
