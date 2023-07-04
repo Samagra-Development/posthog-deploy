@@ -74,6 +74,7 @@ services:
             SITE_URL: ${SITE_URL}
             DISABLE_SECURE_SSL_REDIRECT: ${DISABLE_SECURE_SSL_REDIRECT}
             IS_BEHIND_PROXY: ${IS_BEHIND_PROXY}
+            TRUST_ALL_PROXIES: ${TRUST_ALL_PROXIES}
             DATABASE_URL: ${DATABASE_URL}
             CLICKHOUSE_HOST: posthog_clickhouse
             CLICKHOUSE_DATABASE: 'posthog'
