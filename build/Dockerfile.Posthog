@@ -1,3 +1,4 @@
 FROM posthog/posthog:release-1.40.0
 
 COPY ./compose /compose
+COPY docker-server /code/bin/docker-server
