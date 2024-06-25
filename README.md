@@ -25,4 +25,10 @@ It'll take a few minutes & service should be available at https://`DOMAIN`.COM
 
 ## Notes
 
-- To scale plugin ingestion server (responsible for storing and processing events) - increase the number of partitions in kafka `event-plugin-ingestion` kafka topics and scale the number of instances of plugin server. 
+- To scale plugin ingestion server (responsible for storing and processing events) - increase the number of partitions in kafka `event-plugin-ingestion` kafka topics and scale the number of instances of plugin server.
+
+```
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic my-topic
+
+kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic events_plugin_ingestion --partitions 6
+```
