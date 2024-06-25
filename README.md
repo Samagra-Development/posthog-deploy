@@ -32,3 +32,4 @@ bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic my-topi
 
 kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic events_plugin_ingestion --partitions 6
 ```
+- Increase the gunicorn config according to your server specifications. 
